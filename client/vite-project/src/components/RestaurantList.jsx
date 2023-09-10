@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import RestaurantFinder from '../apis/RestaurantFinder';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function RestaurantList() {
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await RestaurantFinder.get("/");
+                console.log(response.data);
+            } catch (error) {
+                console.error("Error al obtener datos:", error);
+            }
+        };
+        fetchData();
+    }, []);
+
   return (
     <div className='list-group'>
         <table className="table table-hover table-dark">
